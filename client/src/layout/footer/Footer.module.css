@@ -1,0 +1,127 @@
+.footer {
+	background-color: white;
+	padding: 24px 16px;
+	color: #4b5563;
+}
+
+.container {
+	max-width: 1280px;
+	margin: 0 auto;
+}
+
+.top {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
+
+.brand {
+	margin-bottom: 24px;
+}
+
+.logo {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	gap: 12px;
+}
+
+.logoImg {
+	height: 32px;
+}
+
+.logoText {
+	font-size: 24px;
+	font-weight: 600;
+	white-space: nowrap;
+	color: #111827;
+}
+
+.linkGrid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 24px;
+}
+
+@media (min-width: 640px) {
+	.linkGrid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1024px) {
+	.linkGrid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+.linkSection h2 {
+	margin-bottom: 12px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #111827;
+	text-transform: uppercase;
+}
+
+.linkSection ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.linkSection li {
+	margin-bottom: 8px;
+}
+
+.linkSection a {
+	color: #6b7280;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+.linkSection a:hover {
+	text-decoration: underline;
+}
+
+.divider {
+	border: none;
+	border-top: 1px solid #e5e7eb;
+	margin: 32px 0;
+}
+
+.bottom {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	align-items: center;
+	justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+	.top {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.bottom {
+		flex-direction: row;
+	}
+}
+
+.socials {
+	display: flex;
+	gap: 20px;
+}
+
+.socials a {
+	width: 30px;
+	height: 30px;
+	display: block;
+	border-radius: 50%;
+	transition: transform 0.2s ease-in-out;
+	color: rgb(0, 0, 0);
+}
+
+.socials a:hover {
+	transform: translateY(-5px);
+}
