@@ -1,8 +1,10 @@
 import type { Request, Response } from 'express'
 import express from 'express'
 import pool from './config/db.js'
-
+import questRoutes from './routes/questRotes.js'
 const app = express()
+app.use(express.json())
+app.use('/', questRoutes)
 
 pool.query('SELECT NOW()', (err: Error | null, res: any) => {
 	if (err) {

@@ -1,0 +1,153 @@
+.container {
+	position: relative;
+	max-width: 520px;
+	padding: 3rem 2rem 4rem;
+	margin: 4rem auto;
+	background: #8a2be2;
+	border-radius: 24px;
+	color: #ffffff;
+	overflow: hidden;
+}
+
+.mapBackground {
+	position: absolute;
+	top: -20%;
+	left: -20%;
+	right: -20%;
+	bottom: -20%;
+	background: url('/map-pattern.png') center/cover no-repeat;
+	opacity: 0.1;
+	filter: blur(6px);
+	transform: scale(1.2);
+}
+
+.pins {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	z-index: 1;
+}
+
+.pin {
+	position: absolute;
+	width: 12px;
+	height: 12px;
+	background: #00cc99;
+	border-radius: 50% 50% 50% 0;
+	transform: rotate(-45deg) translate(-50%, -50%);
+	animation: pinFloat infinite alternate ease-in-out;
+}
+
+@keyframes pinFloat {
+	from {
+		transform: rotate(-45deg) translate(-50%, -50%) translateY(0);
+		opacity: 0.6;
+	}
+	to {
+		transform: rotate(-45deg) translate(-50%, -50%) translateY(-6px);
+		opacity: 1;
+	}
+}
+
+.compass {
+	width: 90px;
+	position: absolute;
+	top: 15%;
+	right: 15%;
+	animation: compassRotate 8s linear infinite;
+	filter: hue-rotate(300deg) saturate(1.2);
+	z-index: 2;
+}
+
+@keyframes compassRotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.title {
+	position: relative;
+	font-size: 4.5rem;
+	margin: 1rem 0 0.5rem;
+	text-align: center;
+	color: #ffffff;
+	text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+	animation: titlePop 1s ease-out forwards;
+	z-index: 3;
+}
+
+@keyframes titlePop {
+	from {
+		transform: scale(0.8);
+		opacity: 0;
+	}
+	to {
+		transform: scale(1);
+		opacity: 1;
+	}
+}
+
+.subtitle {
+	position: relative;
+	font-size: 1.2rem;
+	text-align: center;
+	margin-bottom: 2rem;
+	color: #ffffff;
+	text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
+	opacity: 0;
+	animation: fadeIn 1.5s ease-in forwards 0.5s;
+	z-index: 3;
+}
+
+@keyframes fadeIn {
+	to {
+		opacity: 1;
+	}
+}
+
+.button {
+	position: relative;
+	display: block;
+	margin: 0 auto;
+	padding: 14px 36px;
+	background: #00cc99;
+	color: #ffffff;
+	border: none;
+	border-radius: 30px;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+	z-index: 3;
+	animation: buttonEntrance 1s ease-out forwards 1s;
+}
+
+@keyframes buttonEntrance {
+	from {
+		transform: translateY(20px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+.button:hover {
+	transform: scale(1.05);
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+	background: #00b386;
+}
+
+.wave {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: auto;
+	z-index: 2;
+}
