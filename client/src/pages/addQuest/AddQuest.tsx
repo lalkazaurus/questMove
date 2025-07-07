@@ -30,7 +30,7 @@ export default function AddQuest() {
 		if (data.checkpoints.length < 1) {
 			setError('checkpoints', {
 				type: 'manual',
-				message: 'Має бути хоча б один чекпоінт',
+				message: 'There has to be at least one checkpoint',
 			})
 		} else {
 			clearErrors('checkpoints')

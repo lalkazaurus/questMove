@@ -22,13 +22,15 @@
 	gap: 10px;
 	padding-left: 20px;
 	padding-right: 20px;
-	justify-content: space-evenly;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
 }
 
 .buttonBlock > button {
 	padding: 10px;
 	min-height: 5%;
-	min-width: 20vw;
+	width: 50%;
 }
 
 .formBody {
@@ -97,8 +99,8 @@
 
 .reset {
 	background-color: white;
-	color: #a5a3f1;
-	border: 2px solid #a5a3f1;
+	color: black;
+	border: 2px solid black;
 	font-weight: 800;
 	font-size: large;
 	transition: all 0.3s ease;
@@ -106,8 +108,8 @@
 }
 
 .reset:hover {
-	background-color: #a5a3f1;
-	color: #00e2a8;
+	background-color: black;
+	color: white;
 	border: 2px solid #00e2a8;
 	font-weight: 900;
 	font-size: large;
