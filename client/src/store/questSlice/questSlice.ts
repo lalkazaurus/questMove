@@ -37,7 +37,7 @@ const initialState: QuestState = {
 export const addQuest = createAsyncThunk(
 	'quests/addQuest',
 	async (quest: Quest) => {
-		const response = await axios.post<Quest>(`${apiUrl}/quests`, quest)
+		const response = await axios.post<Quest>(`${apiUrl}/`, quest)
 		return response.data
 	}
 )
@@ -45,7 +45,7 @@ export const addQuest = createAsyncThunk(
 export const getAllQuests = createAsyncThunk(
 	'quests/getAllQuests',
 	async () => {
-		const response = await axios.get<Array<Quest>>(`${apiUrl}/quests`)
+		const response = await axios.get<Array<Quest>>(`${apiUrl}/`)
 		return response.data
 	}
 )

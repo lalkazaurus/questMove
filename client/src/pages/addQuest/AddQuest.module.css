@@ -1,0 +1,174 @@
+.formContainer {
+	min-height: 60vh;
+	width: 100vw;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.form {
+	width: 70%;
+	height: 90%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.buttonBlock {
+	width: 100%;
+	display: flex;
+	gap: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	justify-content: space-evenly;
+}
+
+.buttonBlock > button {
+	padding: 10px;
+	min-height: 5%;
+	min-width: 20vw;
+}
+
+.formBody {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+}
+
+.formBody > div {
+	padding: 10px;
+	margin: 10px;
+}
+
+.formBody input,
+.formBody textarea {
+	padding: 5px;
+	width: 25%;
+	border: none;
+	outline: 2px solid black;
+	transition: 0.3s ease-in-out all;
+	resize: none;
+	width: 100%;
+}
+
+.formBody input:active,
+.formBody input:focus,
+.formBody textarea:active,
+.formBody textarea:focus {
+	outline: 2px solid #a5a3f1;
+	border: none;
+}
+
+.mainInfo {
+	width: 33%;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.mainInfo input {
+	width: 100%;
+}
+
+.form textarea {
+	height: 10vh;
+}
+
+.submit {
+	background-color: black;
+	color: #a5a3f1;
+	border: 2px solid #a5a3f1;
+	font-weight: 800;
+	font-size: large;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+
+.submit:hover {
+	background-color: #a5a3f1;
+	color: black;
+	border: 2px solid black;
+	font-weight: 800;
+	font-size: large;
+}
+
+.reset {
+	background-color: white;
+	color: #a5a3f1;
+	border: 2px solid #a5a3f1;
+	font-weight: 800;
+	font-size: large;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+
+.reset:hover {
+	background-color: #a5a3f1;
+	color: #00e2a8;
+	border: 2px solid #00e2a8;
+	font-weight: 900;
+	font-size: large;
+	transition: all 0.3s ease;
+}
+
+.checkpoints {
+	width: 67%;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
+.checkpoints > div {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.quest {
+	width: 40%;
+	display: flex;
+	justify-content: center;
+}
+
+.remove {
+	color: #ff5e9b;
+	background: none;
+	border: 2px solid #ff5e9b;
+	transition: 0.3s ease-in all;
+	width: 25%;
+	cursor: pointer;
+}
+
+.remove:hover {
+	color: black;
+	background: #ff5e9b;
+	border: 2px solid black;
+}
+
+.addCheckpointBtn {
+	background-color: #00e2a8;
+	color: black;
+	font-size: large;
+	border: none;
+	padding: 10px 15px;
+	border: 2px solid black;
+	font-weight: 600;
+	cursor: pointer;
+	transition: 0.2s;
+	margin-top: 10px;
+	width: 103%;
+}
+
+.addCheckpointBtn:hover {
+	background-color: black;
+	color: #00e2a8;
+	border: 2px solid #00e2a8;
+}
+
+.title {
+	text-align: center;
+	width: 100%;
+}

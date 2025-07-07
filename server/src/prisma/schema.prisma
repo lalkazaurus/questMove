@@ -16,13 +16,13 @@ model quest {
 }
 
 model checkpoint {
-  id      Int    @id @default(autoincrement())
-  lat     Float
-  lng     Float
-  title   String
-  task    String
-  quation String
-  answer  String
-  questId Int
-  quest   quest  @relation(fields: [questId], references: [id])
+  id       Int    @id @default(autoincrement())
+  lat      Float
+  lng      Float
+  title    String
+  task     String
+  question String
+  answer   String
+  questId  Int
+  quest    quest  @relation(fields: [questId], references: [id])
 }

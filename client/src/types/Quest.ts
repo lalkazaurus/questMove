@@ -7,8 +7,8 @@ export interface Quest {
 		lng: number
 		title: string
 		task: string
-		question?: string
-		answer?: string
+		question: string
+		answer: string
 	}>
 	createdBy: string
 }
