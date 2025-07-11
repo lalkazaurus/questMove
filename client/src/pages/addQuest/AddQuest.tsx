@@ -66,7 +66,7 @@ export default function AddQuest() {
 									},
 								})}
 							/>
-							{errors.description && <span>{}</span>}
+							{errors.description && <span>{errors.description.message}</span>}
 							<label>Please enter a description</label>
 							<textarea
 								placeholder='Description'

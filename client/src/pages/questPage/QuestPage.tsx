@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getQuestById } from '../../store/questSlice/questSlice'
 import type { AppDispatch, RootState } from '../../store/store'
+import styles from './QuestPage.module.css'
 
 interface AnswerForm {
 	answer: string
@@ -25,7 +26,14 @@ export default function QuestPage() {
 	const initialized = useRef(false)
 	const [step, setStep] = useState<number>(0)
 
-	const { handleSubmit, reset, register } = useForm<AnswerForm>({
+	const {
+		handleSubmit,
+		reset,
+		register,
+		formState: { errors },
+		setError,
+		clearErrors,
+	} = useForm<AnswerForm>({
 		mode: 'onChange',
 	})
 
@@ -59,7 +67,13 @@ export default function QuestPage() {
 			} else {
 				handleSteps()
 				reset()
+				clearErrors()
 			}
+		} else {
+			setError('answer', {
+				type: 'manual',
+				message: 'Your answer is wrong',
+			})
 		}
 	}
 
@@ -93,19 +107,27 @@ export default function QuestPage() {
 					</Marker>
 				))}
 			</MapContainer>
+			<div className={styles.title}>
+				<h1>{quest.name}</h1>
+				<span>{quest.description}</span>
+			</div>
 
-			<h1>{quest.name}</h1>
-			<p>{quest.description}</p>
+			<div className={styles.formContainer}>
+				<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+					<h2>{`Question ${step + 1} of ${quest.checkpoints.length}`}</h2>
+					<h3>{currentCheckpoint.question}</h3>
 
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<h2>{`Question ${step + 1} of ${quest.checkpoints.length}`}</h2>
-				<h3>{currentCheckpoint.question}</h3>
+					<input {...register('answer')} />
+					{errors.answer && (
+						<span className={styles.errors}>{errors.answer.message}</span>
+					)}
+					<button type='submit'>Check my answer</button>
+				</form>
+			</div>
 
-				<input {...register('answer')} />
-				<button type='submit'>Check my answer</button>
-			</form>
-
-			<p>{`Quest is created by ${quest.createdBy}`}</p>
+			<p
+				className={styles.author}
+			>{`Quest is created by ${quest.createdBy}`}</p>
 		</>
 	)
 }
