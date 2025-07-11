@@ -5,7 +5,7 @@ export default function Header() {
 		<nav className={styles.navbar}>
 			<div className={styles.container}>
 				<a href='/' className={styles.logo}>
-					<img src='1.png' className={styles.logoImg} alt='Logo' />
+					<img src='/1.png' className={styles.logoImg} alt='Logo' />
 					<span className={styles.logoText}>QuestMove</span>
 				</a>
 

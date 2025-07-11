@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 import type { Request, Response } from 'express'
 import express from 'express'
 import pool from './config/db.js'
-import questRoutes from './routes/questRotes.js'
+import questRoutes from './routes/questRoutes.js'
 
 dotenv.config()
 const app = express()

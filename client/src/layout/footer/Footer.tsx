@@ -10,7 +10,7 @@ export default function Footer() {
 				<div className={styles.top}>
 					<div className={styles.brand}>
 						<a href='/' className={styles.logo}>
-							<img src='1.png' className={styles.logoImg} alt='Flowbite Logo' />
+							<img src='/1.png' className={styles.logoImg} alt='Logo' />
 							<span className={styles.logoText}>QuestMove</span>
 						</a>
 					</div>

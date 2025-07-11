@@ -50,6 +50,14 @@ export const getAllQuests = createAsyncThunk(
 	}
 )
 
+export const getQuestById = createAsyncThunk(
+	'quests/getQuestById',
+	async (id: string) => {
+		const response = await axios.get<Quest>(`${apiUrl}/${id}`)
+		return response.data
+	}
+)
+
 const questSlice = createSlice({
 	name: 'quests',
 	initialState,
@@ -77,6 +85,12 @@ const questSlice = createSlice({
 			.addCase(addQuest.fulfilled, (state, action: PayloadAction<Quest>) => {
 				state.quests.push(action.payload)
 			})
+			.addCase(
+				getQuestById.fulfilled,
+				(state, action: PayloadAction<Quest>) => {
+					state.currentData = action.payload
+				}
+			)
 	},
 })
 

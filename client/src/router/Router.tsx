@@ -4,6 +4,8 @@ import Header from '../layout/header/Header'
 import AddQuest from '../pages/addQuest/AddQuest'
 import Error from '../pages/error/Error'
 import Main from '../pages/main/Main'
+import QuestPage from '../pages/questPage/questPage'
+import QuestSuccess from '../pages/questSuccess/QuestSuccess'
 
 const router = createBrowserRouter([
 	{
@@ -14,7 +16,17 @@ const router = createBrowserRouter([
 	{
 		path: '/addQuest',
 		element: <AddQuest />,
-		errorElement: <h1>Пизда прийшла</h1>,
+		errorElement: <h1>Xалепа</h1>,
+	},
+	{
+		path: '/quest/:id',
+		element: <QuestPage />,
+		errorElement: <h1>Xалепа</h1>,
+	},
+	{
+		path: '/quest-success/:id',
+		element: <QuestSuccess />,
+		errorElement: <h1>Xалепа</h1>,
 	},
 ])
 
