@@ -85,7 +85,7 @@
 	border: 2px solid #a5a3f1;
 	font-weight: 800;
 	font-size: large;
-	transition: all 0.3s ease;
+	transition: all 0.7s ease;
 	cursor: pointer;
 }
 
@@ -103,7 +103,7 @@
 	border: 2px solid black;
 	font-weight: 800;
 	font-size: large;
-	transition: all 0.3s ease;
+	transition: all 0.7s ease;
 	cursor: pointer;
 }
 
@@ -113,7 +113,6 @@
 	border: 2px solid #00e2a8;
 	font-weight: 900;
 	font-size: large;
-	transition: all 0.3s ease;
 }
 
 .checkpoints {
@@ -140,7 +139,7 @@
 	background: none;
 	border: 2px solid #ff5e9b;
 	transition: 0.3s ease-in all;
-	width: 25%;
+	width: calc(100% + 12px);
 	cursor: pointer;
 }
 
@@ -170,7 +169,40 @@
 	border: 2px solid #00e2a8;
 }
 
+.coordBtn {
+	color: #a5a3f1;
+	background: none;
+	border: 2px solid #a5a3f1;
+	transition: 0.3s ease-in all;
+	width: calc(100% + 12px);
+	cursor: pointer;
+	padding: 8px;
+	font-family: 'Inconsolata', monospace;
+}
+
+.coordBtn:hover {
+	color: black;
+	background: #a5a3f1;
+	border: 2px solid black;
+}
+
 .title {
 	text-align: center;
 	width: 100%;
+}
+
+.mapWrapper {
+	flex: 1;
+	height: 100%;
+	position: relative;
+}
+
+.map {
+	height: 100%;
+	width: 100%;
+	min-height: 500px;
+}
+
+.popup {
+	color: #ff5e9b;
 }

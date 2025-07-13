@@ -6,6 +6,7 @@ import 'leaflet/dist/leaflet.css'
 import { useRef } from 'react'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import { useDispatch, useSelector } from 'react-redux'
+import { customIcon } from '../../layout/map-customize/CustomIcon/CustomIcon'
 import { getAllQuests } from '../../store/questSlice/questSlice'
 import type { AppDispatch, RootState } from '../../store/store'
 import QuestElement from './components/QuestElement/QuestElement'
@@ -46,7 +47,7 @@ export default function Main() {
 					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 					url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 				/>
-				<Marker position={position}>
+				<Marker position={position} icon={customIcon}>
 					<Popup>
 						A pretty CSS3 popup. <br /> Easily customizable.
 					</Popup>

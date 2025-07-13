@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { customIcon } from '../../layout/map-customize/CustomIcon/CustomIcon'
 import { getQuestById } from '../../store/questSlice/questSlice'
 import type { AppDispatch, RootState } from '../../store/store'
 import styles from './QuestPage.module.css'
@@ -96,6 +97,7 @@ export default function QuestPage() {
 					<Marker
 						key={cp.id ?? `${cp.lat}-${cp.lng}`}
 						position={[cp.lat, cp.lng]}
+						icon={customIcon}
 					>
 						<Popup>
 							<strong>{cp.title}</strong>

@@ -9,7 +9,7 @@ interface QuestState {
 	currentData: Quest
 }
 
-interface Coordinates {
+export interface Coordinates {
 	lat: number
 	lng: number
 }
