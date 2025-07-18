@@ -1,0 +1,98 @@
+.container {
+	display: flex;
+	min-height: 65vh;
+	width: 100vw;
+	justify-content: center;
+	align-items: center;
+}
+
+.container form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 16px;
+	width: 17%;
+	padding: 24px;
+	background: #fff;
+
+	box-shadow: 0 0 0 rgba(0, 0, 0, 0), 0 4px 20px rgba(0, 0, 0, 0.1),
+		0 0 20px rgba(165, 163, 241, 0.2);
+
+	transition: box-shadow 0.5s ease;
+}
+
+.container form:hover {
+	box-shadow: 0 0 10px rgba(165, 163, 241, 0.4), 0 4px 20px rgba(0, 0, 0, 0.1),
+		0 0 30px rgba(165, 163, 241, 0.6);
+}
+
+.container form input {
+	padding: 8px;
+	width: 100%;
+	border: none;
+	outline: 2px solid black;
+	transition: 0.3s ease-in-out all;
+	resize: none;
+	box-sizing: border-box;
+}
+
+.container form input:active,
+.container form input:focus {
+	outline: 2px solid #a5a3f1;
+	border: none;
+}
+
+.container form .error {
+	min-height: 18px;
+	font-size: 12px;
+	color: crimson;
+	margin: 0;
+	align-self: flex-start;
+}
+
+.submit,
+.reset {
+	width: 100%;
+	font-weight: 800;
+	font-size: large;
+	cursor: pointer;
+	padding: 10px;
+	transition: all 0.4s ease;
+	box-sizing: border-box;
+}
+
+.submit {
+	background-color: black;
+	color: #a5a3f1;
+	border: 2px solid #a5a3f1;
+}
+
+.submit:hover {
+	background-color: #a5a3f1;
+	color: black;
+	border: 2px solid black;
+}
+
+.reset {
+	background-color: white;
+	color: black;
+	border: 2px solid black;
+}
+
+.reset:hover {
+	background-color: black;
+	color: white;
+	border: 2px solid #00e2a8;
+}
+
+.registerLink {
+	margin-top: 10px;
+	font-size: 0.9rem;
+	text-decoration: none;
+	color: #333;
+}
+
+.registerLink:hover {
+	text-decoration: underline;
+}

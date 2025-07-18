@@ -26,3 +26,19 @@ model checkpoint {
   questId  Int
   quest    quest  @relation(fields: [questId], references: [id])
 }
+
+model user {
+  id             Int     @id @default(autoincrement())
+  email          String  @unique
+  password       String
+  activationLink String  @unique
+  isActivated    Boolean @default(false)
+  token          token[]
+}
+
+model token {
+  id           Int    @id @default(autoincrement())
+  userId       Int    @unique
+  refreshToken String @unique
+  user         user   @relation(fields: [userId], references: [id])
+}

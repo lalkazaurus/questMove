@@ -134,6 +134,16 @@
 	border-radius: 4px;
 }
 
+.navList li {
+	text-decoration: none;
+	color: #111827;
+	padding: 8px;
+	border-radius: 4px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .navList li a:hover {
 	background-color: #f3f4f6;
 }

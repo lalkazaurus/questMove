@@ -1,0 +1,101 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	min-height: 100vh;
+	background-color: #fff;
+	padding: 20px;
+	font-family: Arial, sans-serif;
+}
+
+.profile {
+	background: white;
+	box-shadow: 0 0 20px rgba(165, 163, 241, 0.2);
+	border: 2px solid black;
+	border-radius: 8px;
+	width: 80%;
+	max-width: 1000px;
+	display: flex;
+	padding: 20px;
+	gap: 20px;
+}
+
+.left {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.right {
+	flex: 2;
+	background-color: #fafafa;
+	border-radius: 8px;
+	padding: 20px;
+	overflow-y: auto;
+	border: 2px solid black;
+}
+
+.username {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: black;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+}
+
+.status {
+	font-size: 1rem;
+	color: #333;
+	margin-bottom: 20px;
+}
+
+.buttonContainer {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.logout,
+.getUsers {
+	padding: 12px;
+	background-color: black;
+	color: #a5a3f1;
+	border: 2px solid #a5a3f1;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 0.9rem;
+	letter-spacing: 0.5px;
+	border-radius: 0;
+}
+
+.logout:hover {
+	background-color: #a5a3f1;
+	color: black;
+	border: 2px solid black;
+	box-shadow: 0 0 10px rgba(165, 163, 241, 0.4);
+}
+
+.getUsers {
+	background-color: white;
+	color: black;
+	border: 2px solid black;
+}
+
+.getUsers:hover {
+	background-color: black;
+	color: white;
+	border: 2px solid #00e2a8;
+	box-shadow: 0 0 10px rgba(0, 226, 168, 0.4);
+}
+
+.user {
+	background: white;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 2px solid black;
+	border-radius: 0;
+}

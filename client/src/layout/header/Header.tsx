@@ -1,3 +1,4 @@
+import { VscAccount } from 'react-icons/vsc'
 import styles from './Header.module.css'
 
 export default function Header() {
@@ -26,7 +27,9 @@ export default function Header() {
 							<a href='#'>Pricing</a>
 						</li>
 						<li>
-							<a href='#'>Contact</a>
+							<a href='/user/login'>
+								<VscAccount size={25} />
+							</a>
 						</li>
 					</ul>
 				</div>
