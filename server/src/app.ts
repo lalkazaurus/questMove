@@ -17,16 +17,17 @@ app.use(
 		credentials: true,
 	})
 )
-app.use('/', questRoutes)
-app.use('/auth', userRouter)
 
 pool.query('SELECT NOW()', (err: Error | null, res: any) => {
 	if (err) {
 		console.error('Error connecting to the database', err.stack)
 	} else {
-		console.log('Connected to the database:', res.rows)
+		console.log('Database connection successful:', res.rows[0])
 	}
 })
+
+app.use('/', questRoutes)
+app.use('/auth', userRouter)
 
 app.get('/', (_req: Request, res: Response) => {
 	res.send('Server is running')

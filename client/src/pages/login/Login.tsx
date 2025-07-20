@@ -47,12 +47,14 @@ export default function Login() {
 		<div className={styles.container}>
 			<div className={styles.profile}>
 				<div className={styles.left}>
-					<h1 className={styles.username}>{`User: ${user.email}`}</h1>
+					<h1 className={styles.username}>{user.nickname}</h1>
+					<h1 className={styles.username}>{`Email: ${user.email}`}</h1>
 					<h2 className={styles.status}>
 						{user.isActivated
 							? '✅ Account is activated'
 							: '❌ Activate your account'}
 					</h2>
+					<h2 className={styles.status}>User role: {user.role}</h2>
 
 					<div className={styles.buttonContainer}>
 						<button

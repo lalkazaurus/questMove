@@ -7,10 +7,11 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { TbXboxX } from 'react-icons/tb'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { customIcon } from '../../layout/map-customize/CustomIcon/CustomIcon'
 import { addQuest } from '../../store/questSlice/questSlice'
-import type { AppDispatch } from '../../store/store'
+import type { AppDispatch, RootState } from '../../store/store'
 import type { Quest } from '../../types/Quest'
 import styles from './AddQuest.module.css'
 
@@ -22,6 +23,13 @@ L.Icon.Default.mergeOptions({
 })
 
 export default function AddQuest() {
+	const navigate = useNavigate()
+
+	const { role } = useSelector((state: RootState) => state.user.user)
+	if (!['ADMIN', 'MODERATOR'].includes(role)) {
+		navigate('/')
+	}
+
 	const {
 		register,
 		reset,

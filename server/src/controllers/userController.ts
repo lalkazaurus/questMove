@@ -4,6 +4,8 @@ import { validationResult } from 'express-validator'
 import ApiError from '../exceptions/apiError.js'
 import {
 	activate,
+	assignRole,
+	createAdmin,
 	getAllUsers,
 	login,
 	logout,
@@ -22,8 +24,8 @@ class UserController {
 			const errors = validationResult(req)
 			if (!errors.isEmpty())
 				return next(ApiError.BadRequest('Validation Error', errors.array()))
-			const { email, password } = req.body
-			const userData = await register(email, password)
+			const { email, password, nickname } = req.body
+			const userData = await register(email, password, nickname)
 			res.cookie('refreshToken', userData.refreshToken, {
 				maxAge: 30 * 24 * 60 * 60 * 1000,
 				httpOnly: true,
@@ -107,6 +109,38 @@ class UserController {
 		try {
 			const users = await getAllUsers()
 			res.json(users)
+		} catch (e) {
+			next(e)
+		}
+	}
+
+	async createAdmin(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	): Promise<void> {
+		try {
+			const errors = validationResult(req)
+			if (!errors.isEmpty())
+				return next(ApiError.BadRequest('Validation Error', errors.array()))
+
+			const { email, password, nickname } = req.body
+			const userData = await createAdmin(email, password, nickname)
+			res.json(userData)
+		} catch (e) {
+			next(e)
+		}
+	}
+
+	async assignRoles(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	): Promise<void> {
+		try {
+			const { userId, role } = req.body
+			const updatedUser = await assignRole(userId, role)
+			res.json(updatedUser)
 		} catch (e) {
 			next(e)
 		}

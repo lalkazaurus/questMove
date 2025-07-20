@@ -17,4 +17,8 @@ export default class ApiError extends Error {
 	static BadRequest(message: string, errors: unknown[] = []): ApiError {
 		return new ApiError(400, message, errors)
 	}
+
+	static Forbidden(message: string, errors: unknown[] = []): ApiError {
+		return new ApiError(403, message, errors)
+	}
 }

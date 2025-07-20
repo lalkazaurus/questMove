@@ -29,11 +29,20 @@ model checkpoint {
 
 model user {
   id             Int     @id @default(autoincrement())
+  nickname       String  @unique
   email          String  @unique
   password       String
   activationLink String  @unique
   isActivated    Boolean @default(false)
-  token          token[]
+  role_id        Int
+  role           Role    @relation(fields: [role_id], references: [id])
+  tokens         token[]
+}
+
+model Role {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  users user[]
 }
 
 model token {
