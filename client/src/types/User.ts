@@ -4,6 +4,7 @@ export interface IUser {
 	id: string
 	role: string
 	nickname: string
+	done_quests: number[]
 }
 
 export interface IUserLogin {

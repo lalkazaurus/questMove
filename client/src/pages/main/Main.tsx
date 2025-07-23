@@ -33,7 +33,6 @@ export default function Main() {
 		initialized.current = true
 	}
 	const quests = useSelector((state: RootState) => state.quests.quests)
-	console.log(quests)
 
 	return (
 		<div className='map-container'>

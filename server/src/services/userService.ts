@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt'
+import { format } from 'date-fns'
 import { v4 as uuidv4 } from 'uuid'
 import UserDto from '../dtos/userDto.js'
 import ApiError from '../exceptions/apiError.js'
@@ -123,6 +124,58 @@ export const refresh = async (refreshToken: string) => {
 	await tokenService.saveToken(userDto.id, tokens.refreshToken)
 
 	return { ...tokens, user: userDto }
+}
+
+export const addDoneQuest = async (userId: number, questId: number) => {
+	const user = await prisma.user.findUnique({ where: { id: userId } })
+	const formattedDate = format(new Date(), 'yyyy-MM-dd HH:mm:ss')
+	if (!user) {
+		throw ApiError.BadRequest(`User not found`)
+	}
+
+	const quest = await prisma.quest.findUnique({ where: { id: questId } })
+	if (!quest) {
+		throw ApiError.BadRequest(`Quest not found`)
+	}
+
+	const existingProgress = await prisma.quest_progress.findUnique({
+		where: {
+			userId_questId: { userId, questId },
+		},
+	})
+
+	if (existingProgress) {
+		return existingProgress
+	}
+
+	await prisma.user.update({
+		where: { id: userId },
+		data: {
+			done_quests: { push: questId },
+		},
+	})
+
+	return await prisma.quest_progress.create({
+		data: {
+			userId,
+			questId,
+			completedAt: formattedDate,
+			status: 'Successfully done',
+		},
+	})
+}
+
+export const getQuestProgressByUserId = async (userId: number) => {
+	const user = await prisma.user.findUnique({ where: { id: userId } })
+	if (!user) {
+		throw ApiError.BadRequest(`User not found`)
+	}
+
+	return await prisma.quest_progress.findMany({
+		where: {
+			userId: user.id,
+		},
+	})
 }
 
 export const getAllUsers = async () => {

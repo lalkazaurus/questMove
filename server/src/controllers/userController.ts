@@ -4,9 +4,11 @@ import { validationResult } from 'express-validator'
 import ApiError from '../exceptions/apiError.js'
 import {
 	activate,
+	addDoneQuest,
 	assignRole,
 	createAdmin,
 	getAllUsers,
+	getQuestProgressByUserId,
 	login,
 	logout,
 	refresh,
@@ -141,6 +143,38 @@ class UserController {
 			const { userId, role } = req.body
 			const updatedUser = await assignRole(userId, role)
 			res.json(updatedUser)
+		} catch (e) {
+			next(e)
+		}
+	}
+
+	async addDoneQuests(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	): Promise<void> {
+		try {
+			const { userId, questId } = req.body
+			const questProgress = await addDoneQuest(userId, questId)
+			res.json(questProgress)
+		} catch (e) {
+			next(e)
+		}
+	}
+
+	async getQuestProgressByUserID(
+		req: Request,
+		res: Response,
+		next: NextFunction
+	): Promise<void> {
+		try {
+			const userId = parseInt(req.params.userId, 10)
+
+			if (isNaN(userId)) {
+				throw ApiError.BadRequest('Invalid user ID')
+			}
+			const questProgress = await getQuestProgressByUserId(userId)
+			res.json(questProgress)
 		} catch (e) {
 			next(e)
 		}

@@ -1,0 +1,38 @@
+.linkWrap {
+	display: block;
+	text-decoration: none;
+	color: black;
+	margin-bottom: 1.5rem;
+	transition: all 0.1s ease;
+}
+
+.linkWrap:hover {
+	transform: translate(-5px, -5px);
+}
+
+.questCard {
+	padding: 1.5rem;
+	background: white;
+	border: 2px solid black;
+	box-shadow: 7px 7px 0px #a5a3f1;
+}
+
+.questTitle {
+	font-size: 1.2rem;
+	font-weight: 800;
+	margin-bottom: 0.5rem;
+	text-transform: uppercase;
+}
+
+.questMeta {
+	display: flex;
+	gap: 1.5rem;
+	font-size: 0.9rem;
+	font-weight: 600;
+}
+
+.questStatus {
+	color: #a5a3f1;
+	font-weight: 800;
+	text-transform: uppercase;
+}

@@ -9,6 +9,7 @@ import { TbXboxX } from 'react-icons/tb'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import LoadingComponent from '../../layout/loading-component/LoadingComponent'
 import { customIcon } from '../../layout/map-customize/CustomIcon/CustomIcon'
 import { addQuest } from '../../store/questSlice/questSlice'
 import type { AppDispatch, RootState } from '../../store/store'
@@ -22,13 +23,53 @@ L.Icon.Default.mergeOptions({
 	shadowUrl: markerShadow.src,
 })
 
+function DraggableMarker({
+	initialPosition,
+	onPositionChange,
+}: {
+	initialPosition: { lat: number; lng: number }
+	onPositionChange: (lat: number, lng: number) => void
+}) {
+	const draggable = true
+	const [position, setPosition] = useState(initialPosition)
+	const markerRef = useRef<LeafletMarker | null>(null)
+
+	useEffect(() => {
+		setPosition(initialPosition)
+	}, [initialPosition])
+
+	const eventHandlers = useMemo(
+		() => ({
+			dragend() {
+				const marker = markerRef.current
+				if (marker != null) {
+					const newPosition = marker.getLatLng()
+					setPosition(newPosition)
+					onPositionChange(newPosition.lat, newPosition.lng)
+				}
+			},
+		}),
+		[onPositionChange]
+	)
+
+	return (
+		<Marker
+			draggable={draggable}
+			eventHandlers={eventHandlers}
+			position={position}
+			ref={markerRef}
+			icon={customIcon}
+		>
+			<Popup className={styles.popup} minWidth={90}>
+				<span>Move me to your destination</span>
+			</Popup>
+		</Marker>
+	)
+}
+
 export default function AddQuest() {
 	const navigate = useNavigate()
-
-	const { role } = useSelector((state: RootState) => state.user.user)
-	if (!['ADMIN', 'MODERATOR'].includes(role)) {
-		navigate('/')
-	}
+	const { user, isLoading } = useSelector((state: RootState) => state.user)
 
 	const {
 		register,
@@ -46,6 +87,11 @@ export default function AddQuest() {
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'checkpoints',
+	})
+
+	const [markerPosition, setMarkerPosition] = useState({
+		lat: 51.505,
+		lng: -0.09,
 	})
 
 	function setCheckpointCoords(lat: number, lng: number, index: number): void {
@@ -67,62 +113,20 @@ export default function AddQuest() {
 			reset()
 		}
 	}
-	const center = {
-		lat: 51.505,
-		lng: -0.09,
+
+	if (isLoading) {
+		return <LoadingComponent />
 	}
 
-	function DraggableMarker({
-		initialPosition,
-		onPositionChange,
-	}: {
-		initialPosition: { lat: number; lng: number }
-		onPositionChange: (lat: number, lng: number) => void
-	}) {
-		const draggable = true
-		const [position, setPosition] = useState(initialPosition)
-		const markerRef = useRef<LeafletMarker | null>(null)
-
-		useEffect(() => {
-			setPosition(initialPosition)
-		}, [initialPosition])
-
-		const eventHandlers = useMemo(
-			() => ({
-				dragend() {
-					const marker = markerRef.current
-					if (marker != null) {
-						const newPosition = marker.getLatLng()
-						setPosition(newPosition)
-						onPositionChange(newPosition.lat, newPosition.lng)
-					}
-				},
-			}),
-			[onPositionChange]
-		)
-
-		return (
-			<Marker
-				draggable={draggable}
-				eventHandlers={eventHandlers}
-				position={position}
-				ref={markerRef}
-				icon={customIcon}
-			>
-				<Popup className={styles.popup} minWidth={90}>
-					<span>Move me to your destination</span>
-				</Popup>
-			</Marker>
-		)
+	if (!['ADMIN', 'MODERATOR'].includes(user.role)) {
+		navigate('/')
 	}
-
-	const [markerPosition, setMarkerPosition] = useState(center)
 
 	return (
 		<>
 			<div className={styles.formContainer}>
 				<MapContainer
-					center={center}
+					center={markerPosition}
 					zoom={13}
 					scrollWheelZoom={false}
 					style={{ height: '400px', width: '100%' }}

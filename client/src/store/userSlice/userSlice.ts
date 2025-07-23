@@ -5,13 +5,15 @@ import { apiUrl } from '../../http'
 import { AuthService } from '../../services/auth.service'
 import { UserService } from '../../services/user.service'
 import type { AuthResponse } from '../../types/AuthResponse'
+import type { QuestProgress } from '../../types/QuestProgress'
 import type { IUser } from '../../types/User'
 
 interface UserState {
 	user: IUser
+	questProgress: QuestProgress
 	isAuth: boolean
 	isLoading: boolean
-	users: IUser[]
+	quests: QuestProgress[]
 }
 
 const initialState: UserState = {
@@ -21,10 +23,17 @@ const initialState: UserState = {
 		id: '',
 		role: '',
 		nickname: '',
+		done_quests: [] as number[],
+	},
+	questProgress: {
+		questId: 0,
+		userId: 0,
+		completedAt: '',
+		status: '',
 	},
 	isAuth: false,
 	isLoading: false,
-	users: [],
+	quests: [],
 }
 
 export const login = createAsyncThunk<
@@ -100,29 +109,14 @@ export const checkAuth = createAsyncThunk<IUser, void, { rejectValue: string }>(
 	}
 )
 
-export const fetchUsers = createAsyncThunk(
-	'user/fetchUsers',
-	async (_, { rejectWithValue }) => {
-		try {
-			const response = await UserService.fetchUsers()
-			return response.data
-		} catch (e) {
-			if (axios.isAxiosError(e)) {
-				return rejectWithValue(e.response?.data?.message)
-			}
-			return rejectWithValue('Unknown error')
-		}
-	}
-)
-
-export const assignUserRoles = createAsyncThunk(
-	'user/assignRoles',
+export const addDoneQuest = createAsyncThunk(
+	'user/addDoneQuest',
 	async (
-		{ userId, roles }: { userId: string; roles: string[] },
+		{ userId, questId }: { userId: number; questId: number },
 		{ rejectWithValue }
 	) => {
 		try {
-			const response = await UserService.assignRoles(userId, roles)
+			const response = await UserService.addDoneQuest(userId, questId)
 			return response.data
 		} catch (e) {
 			if (axios.isAxiosError(e)) {
@@ -145,6 +139,9 @@ const userSlice = createSlice({
 		},
 		setLoading: (state, action: PayloadAction<boolean>) => {
 			state.isLoading = action.payload
+		},
+		setDoneQuests: (state, action: PayloadAction<number>) => {
+			state.user.done_quests.push(action.payload)
 		},
 	},
 	extraReducers: builder => {
@@ -192,33 +189,20 @@ const userSlice = createSlice({
 			.addCase(checkAuth.fulfilled, (state, action) => {
 				state.isLoading = false
 				state.isAuth = true
-				state.user = action.payload
+				state.user = {
+					...action.payload,
+					done_quests: action.payload.done_quests || [],
+				}
 			})
 			.addCase(checkAuth.rejected, state => {
 				state.isLoading = false
 			})
-			.addCase(fetchUsers.pending, state => {
+			.addCase(addDoneQuest.fulfilled, (state, action) => {
+				state.isLoading = false
+				state.questProgress = action.payload
+			})
+			.addCase(addDoneQuest.pending, state => {
 				state.isLoading = true
-			})
-			.addCase(fetchUsers.fulfilled, (state, action) => {
-				state.isLoading = false
-				state.users = action.payload
-			})
-			.addCase(fetchUsers.rejected, state => {
-				state.isLoading = false
-			})
-
-			.addCase(assignUserRoles.pending, state => {
-				state.isLoading = true
-			})
-			.addCase(assignUserRoles.fulfilled, (state, action) => {
-				state.isLoading = false
-				state.users = state.users.map(user =>
-					user.id === action.payload.id ? action.payload : user
-				)
-			})
-			.addCase(assignUserRoles.rejected, state => {
-				state.isLoading = false
 			})
 	},
 })

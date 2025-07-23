@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Footer from '../layout/footer/Footer'
 import Header from '../layout/header/Header'
@@ -8,6 +10,7 @@ import Main from '../pages/main/Main'
 import QuestPage from '../pages/questPage/QuestPage'
 import QuestSuccess from '../pages/questSuccess/QuestSuccess'
 import Register from '../pages/register/Register'
+import { checkAuth } from '../store/userSlice/userSlice'
 
 const router = createBrowserRouter([
 	{
@@ -43,6 +46,13 @@ const router = createBrowserRouter([
 ])
 
 export default function Router() {
+	const dispatch = useDispatch()
+	useEffect(() => {
+		if (localStorage.getItem('token')) {
+			dispatch(checkAuth())
+		}
+	}, [dispatch])
+
 	return (
 		<>
 			<Header />

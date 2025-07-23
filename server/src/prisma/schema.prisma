@@ -8,11 +8,12 @@ datasource db {
 }
 
 model quest {
-  id          Int          @id @default(autoincrement())
+  id          Int              @id @default(autoincrement())
   name        String
   description String
   createdBy   String
   checkpoints checkpoint[]
+  progress    quest_progress[]
 }
 
 model checkpoint {
@@ -28,15 +29,17 @@ model checkpoint {
 }
 
 model user {
-  id             Int     @id @default(autoincrement())
-  nickname       String  @unique
-  email          String  @unique
+  id             Int              @id @default(autoincrement())
+  nickname       String           @unique
+  email          String           @unique
   password       String
-  activationLink String  @unique
-  isActivated    Boolean @default(false)
+  activationLink String           @unique
+  isActivated    Boolean          @default(false)
   role_id        Int
-  role           Role    @relation(fields: [role_id], references: [id])
+  role           Role             @relation(fields: [role_id], references: [id])
   tokens         token[]
+  done_quests    Int[]
+  QuestProgress  quest_progress[]
 }
 
 model Role {
@@ -50,4 +53,16 @@ model token {
   userId       Int    @unique
   refreshToken String @unique
   user         user   @relation(fields: [userId], references: [id])
+}
+
+model quest_progress {
+  userId      Int
+  questId     Int
+  completedAt String
+  status      String
+
+  user  user  @relation(fields: [userId], references: [id])
+  quest quest @relation(fields: [questId], references: [id])
+
+  @@id([userId, questId])
 }

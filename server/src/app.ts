@@ -5,6 +5,7 @@ import type { Request, Response } from 'express'
 import express from 'express'
 import pool from './config/db.js'
 import userRouter from './routes/authRoutes.js'
+import profileRoutes from './routes/profileRoutes.js'
 import questRoutes from './routes/questRoutes.js'
 
 dotenv.config()
@@ -28,6 +29,7 @@ pool.query('SELECT NOW()', (err: Error | null, res: any) => {
 
 app.use('/', questRoutes)
 app.use('/auth', userRouter)
+app.use('/profile', profileRoutes)
 
 app.get('/', (_req: Request, res: Response) => {
 	res.send('Server is running')
